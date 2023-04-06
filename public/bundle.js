@@ -4336,11 +4336,48 @@ var Home = function Home() {
       return _ref.apply(this, arguments);
     };
   }();
+  var addBird = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(_ref2) {
+      var name, family, habitat, imageurl, description, _yield$axios$post, data;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            name = _ref2.name, family = _ref2.family, habitat = _ref2.habitat, imageurl = _ref2.imageurl, description = _ref2.description;
+            _context2.next = 3;
+            return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('http://localhost:8080/api/birds', {
+              name: name,
+              family: family,
+              habitat: habitat,
+              imageurl: imageurl,
+              description: description
+            });
+          case 3:
+            _yield$axios$post = _context2.sent;
+            data = _yield$axios$post.data;
+            setAllBirds(function () {
+              for (var _len = arguments.length, prev = new Array(_len), _key = 0; _key < _len; _key++) {
+                prev[_key] = arguments[_key];
+              }
+              return [].concat(prev, [data]);
+            });
+          case 6:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }));
+    return function addBird(_x2) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetchBirds();
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Welcome"), allBirds.map(function (bird) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, " ", bird.name);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, " ", bird.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: bird.imageUrl,
+      className: "allBirdImg"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, " Habitat: ", bird.habitat), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, " Description: ", bird.description));
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
