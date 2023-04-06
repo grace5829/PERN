@@ -29,3 +29,20 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+router.put('/:id', async (req, res, next) => {
+  try {
+    const bird = await Birds.findByPk(req.params.id)
+    res.send(await bird.update(req.body))
+  } catch (err) {
+    next(err)
+  }
+})
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const bird = await Birds.findByPk(req.params.id)
+    await bird.destroy()
+    res.send(bird)
+  } catch (err) {
+    next(err)
+  }
+})
