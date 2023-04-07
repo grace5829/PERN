@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Route, Routes, useParams } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -6,7 +7,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>Navbar</h1>
+    <Link to={'/'}>Home</Link>
     </div>
   );
 };

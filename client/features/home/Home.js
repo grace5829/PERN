@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link, Route, Routes, useParams } from "react-router-dom";
 import AddBird from '../AddBird';
 
 const Home = () => {
@@ -24,11 +25,11 @@ let addBird=async ({name, family, habitat, imageurl, description})=>{
     setAllBirds((prev)=> [...prev, data])
 }
 
-let removeBird=async ({id})=>{
+let removeBird=async (id)=>{
   console.log(id)
   const { data } = await axios.delete(`http://localhost:8080/api/birds/${id}`)
 
-console.log(data)
+fetchBirds()
 }
 
   useEffect( ()=>{
@@ -74,11 +75,12 @@ console.log(data)
             </form>        
     </div>
       {allBirds.map((bird)=>(
-        <div> 
+        <div key={bird.id}> 
+        <Link to={`/${bird.name}`} state={{data:bird}}> 
         <h3> {bird.name}</h3>
-        {bird.id}
-        <button onClick={()=>removeBird(bird.id)}>X</button>
+        </Link>
         <img src={bird.imageUrl} className="allBirdImg"/> 
+        <span onClick={()=>removeBird(bird.id)}>X</span>
         <div> Habitat: {bird.habitat}</div>
          {bird.description?<div> Description: {bird.description} </div> : <></>}
         </div>
